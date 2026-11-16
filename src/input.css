@@ -102,3 +102,10 @@ body::after {
     bottom: -200px;
     left: -150px
 }
+
+/* .hero-grid {
+    background-image: linear-gradient(var(--border) 1px, transparent 1px), linear-gradient(90deg, var(--border) 1px, transparent 1px);
+    background-size: 56px 56px;
+    mask-image: linear-gradient(to bottom, black, transparent 90%);
+    opacity: .22;
+} */
