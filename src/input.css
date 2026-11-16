@@ -1,0 +1,104 @@
+@import "tailwindcss";
+
+:root {
+    --bg: #050914;
+    --surface: #0B1425;
+    --card: #101D32;
+    --border: #1D3452;
+    --blue: #2563EB;
+    --electric: #38BDF8;
+    --ice: #C8F7FF;
+    --lightning: #DFFF00;
+    --text: #F1F5F9;
+    --muted: #8FA3BB;
+    --on: #050914;
+    --bolt-on: #0A1020;
+    --glow: rgba(56, 189, 248, .35);
+    --orb1: #2563EB;
+    --orb2: #38BDF8;
+    --orbop: .17;
+    --head: 'Space Grotesk', 'Helvetica Neue', Arial, sans-serif;
+    --body: 'Inter', system-ui, sans-serif;
+}
+
+[data-theme="light"] {
+    --bg: #EDF3FA;
+    --surface: #FFFFFF;
+    --card: #F7FAFE;
+    --border: #C6D5E8;
+    --blue: #1D4ED8;
+    --electric: #1B6FE0;
+    --ice: #0B3A8F;
+    --text: #0B1730;
+    --muted: #4A5F7A;
+    --on: #FFFFFF;
+    --glow: rgba(27, 111, 224, .28);
+    --orbop: .14;
+}
+
+@theme inline {
+    /* Colors */
+    --color-bg: var(--bg);
+    --color-surface: var(--surface);
+    --color-card: var(--card);
+    --color-border: var(--border);
+    --color-blue: var(--blue);
+    --color-electric: var(--electric);
+    --color-ice: var(--ice);
+    --color-lightning: var(--lightning);
+    --color-text: var(--text);
+    --color-muted: var(--muted);
+    --color-on: var(--on);
+    --color-bolt-on: var(--bolt-on);
+
+    /* Glow */
+    --color-glow: var(--glow);
+
+    /* Orb colors */
+    --color-orb1: var(--orb1);
+    --color-orb2: var(--orb2);
+
+    /* Opacity */
+    --opacity-orbop: var(--orbop);
+
+    /* Fonts */
+    --font-head: var(--head);
+    --font-body: var(--body);
+}
+
+html {
+    scroll-behavior: smooth
+}
+
+body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: var(--body);
+    overflow-x: hidden;
+    transition: background .5s, color .5s
+}
+
+body::before,
+body::after {
+    content: "";
+    position: fixed;
+    width: 420px;
+    height: 420px;
+    border-radius: 50%;
+    filter: blur(140px);
+    pointer-events: none;
+    z-index: -1;
+    opacity: var(--orbop)
+}
+
+body::before {
+    background: var(--orb1);
+    top: -180px;
+    right: -100px
+}
+
+body::after {
+    background: var(--orb2);
+    bottom: -200px;
+    left: -150px
+}
