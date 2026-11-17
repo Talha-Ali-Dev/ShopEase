@@ -109,16 +109,34 @@ products.forEach((product) => {
 
                     <button
                         class="bg-blue text-text cursor-pointer rounded-sm border border-border px-6 py-2 font-medium "
-                        id="card-btn">Add to cart</button>
+                        id="add-card-btn">Add to cart</button>
                 </div>
 
             </div> 
         `
 
-
     )
 
 })
+
+// CartBtn 
+let addToCartBtn = document.querySelectorAll("#add-card-btn");
+let cartCount = document.querySelector("#cart-count");
+
+let count = 0;
+
+addToCartBtn?.forEach((cartBtn) => {
+
+    cartBtn.addEventListener("click", () => {
+
+        count++;
+        cartCount.innerText = count
+
+    });
+
+})
+
+
 
 
 
