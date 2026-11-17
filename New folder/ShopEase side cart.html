@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>ShopEase side cart</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400;12..96,500;12..96,600&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#060B1C;--surface:#0D1730;--surface2:#112043;--line:#1E2F57;--text:#F2F6FF;--muted:#8DA0C4;
+  --blue:#2563EB;--sky:#38BDF8;--lime:#D9F24A;--scrim:rgba(3,6,16,.7);
+  --r-in:12px;--r-card:20px;--r-drawer:28px;
+  --font:"Bricolage Grotesque",system-ui,-apple-system,"Segoe UI",Roboto,Arial,sans-serif;
+  color-scheme:dark;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px);
+}
+@media (prefers-color-scheme:light){:root:not([data-theme="dark"]){--bg:#F3F6FD;--surface:#FFFFFF;--surface2:#EAF0FC;--line:#D3DCF0;--text:#0B1226;--muted:#5A6B8F;--scrim:rgba(11,18,38,.45);color-scheme:light}}
+:root[data-theme="light"]{--bg:#F3F6FD;--surface:#FFFFFF;--surface2:#EAF0FC;--line:#D3DCF0;--text:#0B1226;--muted:#5A6B8F;--scrim:rgba(11,18,38,.45);color-scheme:light}
+html{scroll-padding-top:env(safe-area-inset-top,0px)}
+*,*::before,*::after{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--text);font-family:var(--font);min-height:100vh}
+h1,h2,h3,p{margin:0;text-wrap:pretty}
+h1,h2{text-wrap:balance}
+button,input{font-family:inherit;color:inherit}
+button{cursor:pointer}
+:focus-visible{outline:2px solid var(--sky);outline-offset:3px}
+
+/* Named text styles */
+.heading-3{font-size:2.25rem;line-height:2.5rem;font-weight:600}
+.heading-5{font-size:1.5rem;line-height:2rem;font-weight:600}
+.title-2{font-size:1.125rem;line-height:1.75rem;font-weight:500}
+.title-3{font-size:1rem;line-height:1.5rem;font-weight:500}
+.body-1{font-size:1rem;line-height:1.5rem;font-weight:600}
+.body-3{font-size:1rem;line-height:1.5rem;font-weight:400}
+.body-4{font-size:.875rem;line-height:1.25rem;font-weight:600}
+.body-6{font-size:.875rem;line-height:1.25rem;font-weight:400}
+.button-md{font-size:1rem;line-height:1.5rem;font-weight:600}
+.button-sm{font-size:.875rem;line-height:1.25rem;font-weight:600}
+.caption-1{font-size:.875rem;line-height:1.25rem;font-weight:500}
+.caption-3{font-size:.75rem;line-height:1rem;font-weight:600}
+.eyebrow{color:var(--sky);text-transform:uppercase;letter-spacing:.12em}
+.muted{color:var(--muted)}
+
+/* Buttons */
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;border:1px solid var(--line);background:transparent;border-radius:999px;padding:8px 24px;text-decoration:none;transition:transform .15s,background .15s}
+.btn:hover{background:var(--surface2)}
+.btn:active{transform:scale(.97)}
+.btn.primary{background:var(--blue);border-color:var(--blue);color:#fff}
+.btn.primary:hover{background:#1D4FD8}
+.btn.primary:disabled{opacity:.45;cursor:not-allowed}
+.btn.sm{padding:4px 16px}
+.btn.block{width:100%}
+.icon-btn{width:40px;height:40px;border-radius:50%;border:1px solid var(--line);background:var(--surface);display:grid;place-items:center;padding:0}
+.badge{display:inline-grid;place-items:center;min-width:24px;height:24px;padding:0 8px;border-radius:999px;background:var(--surface);color:var(--text);margin-left:8px}
+
+/* Page shell */
+header{display:flex;align-items:center;gap:16px;height:72px;padding:0 32px;border-bottom:1px solid var(--line)}
+.logo{margin-right:auto;font-weight:600;font-size:1.125rem}
+.logo b{color:var(--sky);font-weight:600}
+.pill-nav{display:flex;gap:24px;padding:8px 24px;border:1px solid var(--line);border-radius:999px;background:var(--surface)}
+@media (max-width:760px){.pill-nav{display:none}header{padding:0 16px}}
+.stub{max-width:720px;padding:96px 32px}
+.stub p{margin-top:16px}
+.stub .btn{margin-top:24px}
+
+/* Drawer */
+.scrim{position:fixed;inset:0;background:var(--scrim);opacity:0;pointer-events:none;transition:opacity .25s;z-index:40}
+.scrim.open{opacity:1;pointer-events:auto}
+.drawer{position:fixed;top:0;right:0;bottom:0;width:min(440px,100%);z-index:50;background:var(--bg);border-left:1px solid var(--line);border-radius:var(--r-drawer) 0 0 var(--r-drawer);display:flex;flex-direction:column;transform:translateX(104%);transition:transform .3s cubic-bezier(.2,.8,.2,1);padding:calc(24px + env(safe-area-inset-top,0px)) 24px calc(24px + env(safe-area-inset-bottom,0px))}
+.drawer.open{transform:none}
+@media (max-width:520px){.drawer{border-radius:0;border-left:0}}
+.d-head{display:flex;justify-content:space-between;align-items:center;margin-bottom:24px}
+.d-head h2{margin-top:4px}
+.ship{background:var(--surface);border:1px solid var(--line);border-radius:var(--r-card);padding:16px;margin-bottom:16px}
+.bar{height:8px;border-radius:999px;background:var(--surface2);margin-top:16px;overflow:hidden}
+.bar i{display:block;height:100%;border-radius:999px;background:var(--sky);transition:width .35s}
+.items{flex:1;overflow:auto;display:flex;flex-direction:column;gap:12px;padding:2px}
+.item{display:grid;grid-template-columns:72px 1fr auto;gap:16px;background:var(--surface);border:1px solid var(--line);border-radius:var(--r-card);padding:8px 16px 8px 8px;align-items:center}
+.thumb{width:72px;height:72px;border-radius:var(--r-in);background:var(--surface2);border:1px solid var(--line);display:grid;place-items:center;font-size:32px}
+.item .price{text-align:right;display:flex;flex-direction:column;align-items:flex-end;gap:8px}
+.link{background:none;border:0;padding:0;color:var(--muted);text-decoration:underline;text-underline-offset:3px}
+.link:hover{color:var(--text)}
+.qty{display:inline-flex;align-items:center;gap:4px;margin-top:8px;border:1px solid var(--line);border-radius:999px;padding:2px}
+.qty button{width:28px;height:28px;border-radius:50%;border:0;background:var(--surface2);padding:0}
+.qty button:hover{background:var(--line)}
+.qty span{min-width:24px;text-align:center}
+.empty{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:16px;text-align:center;flex:1;padding:24px}
+.empty .thumb{width:96px;height:96px;font-size:40px;border-radius:var(--r-card)}
+.sum{background:var(--surface);border:1px solid var(--line);border-radius:var(--r-card);padding:16px;margin-top:16px;display:flex;flex-direction:column;gap:12px}
+.row{display:flex;justify-content:space-between;align-items:baseline}
+.promo{display:flex;gap:8px;padding:4px;border:1px solid var(--line);border-radius:999px;background:var(--bg)}
+.promo input{flex:1;min-width:0;border:0;background:transparent;padding:0 16px;font-size:.875rem;outline:none}
+.promo:focus-within{border-color:var(--sky)}
+.promo input::placeholder{color:var(--muted)}
+.pmsg{min-height:20px}
+.total{border-top:1px solid var(--line);padding-top:12px}
+.actions{display:flex;flex-direction:column;gap:8px;margin-top:16px}
+@media (prefers-reduced-motion:reduce){*,*::before,*::after{transition:none!important}}
+</style>
+</head>
+<body>
+<header>
+  <span class="logo">ShopEase<b>.</b></span>
+  <nav class="pill-nav button-sm muted"><span>Home</span><span>Why us</span><span>About</span><span>Products</span><span>Contact</span></nav>
+  <button class="icon-btn" id="theme" aria-label="Switch theme">☀</button>
+  <button class="btn primary sm button-sm" id="openCart">Cart<span class="badge caption-3" id="count">0</span></button>
+</header>
+<main class="stub">
+  <p class="eyebrow caption-3">The collection</p>
+  <h1 class="heading-3" style="margin-top:8px">Good things, picked with you in mind.</h1>
+  <p class="body-3 muted">Open the cart from the header to see the side cart in use.</p>
+  <button class="btn primary button-md" id="open2">Open cart ↗</button>
+</main>
+
+<div class="scrim" id="scrim"></div>
+<aside class="drawer" id="drawer" role="dialog" aria-modal="true" aria-labelledby="dt" aria-hidden="true">
+  <div class="d-head">
+    <div><p class="eyebrow caption-3">Your bag</p><h2 class="heading-5" id="dt">Cart</h2></div>
+    <button class="icon-btn" id="close" aria-label="Close cart">✕</button>
+  </div>
+  <div class="ship" id="ship"></div>
+  <div class="items" id="items"></div>
+  <div id="foot"></div>
+</aside>
+
+<script>
+var P=[
+{id:1,n:"Smart tablet",c:"Tech",p:249,e:"📱"},
+{id:2,n:"Everyday speaker",c:"Accessories",p:59,e:"🔊"},
+{id:3,n:"Soft cotton tee",c:"Clothing",p:32,e:"👕"},
+{id:4,n:"Storage jar set",c:"Living",p:28,e:"🫙"}];
+var cart={1:1,3:2},promo=false,FREE=75;
+var $=function(i){return document.getElementById(i)};
+function m(n){return "$"+n.toFixed(2).replace(/\.00$/,"")}
+function pr(id){return P.filter(function(p){return p.id==id})[0]}
+function render(){
+  var ids=Object.keys(cart),n=0,sub=0;
+  ids.forEach(function(i){n+=cart[i];sub+=cart[i]*pr(i).p});
+  var disc=promo?sub*.1:0,after=sub-disc,left=Math.max(0,FREE-after),shipFee=(left===0||!ids.length)?0:6,total=after+shipFee;
+  $("count").textContent=n;
+  $("ship").innerHTML=ids.length?'<p class="body-4">'+(left===0?'You’ve unlocked free shipping.':'You’re '+m(left)+' away from free shipping.')+'</p><div class="bar"><i style="width:'+Math.min(100,after/FREE*100)+'%"></i></div>':'<p class="body-4">Free shipping on orders over '+m(FREE)+'.</p>';
+  $("items").innerHTML=ids.length?ids.map(function(i,k){var p=pr(i);return '<div class="item"><div class="thumb">'+p.e+'</div><div><p class="eyebrow caption-3">0'+(k+1)+' / '+p.c+'</p><p class="title-3">'+p.n+'</p><div class="qty"><button data-m="'+i+'" aria-label="Remove one">−</button><span class="body-4">'+cart[i]+'</span><button data-p="'+i+'" aria-label="Add one">+</button></div></div><div class="price"><span class="body-1">'+m(cart[i]*p.p)+'</span><button class="link caption-1" data-r="'+i+'">Remove</button></div></div>'}).join(""):'<div class="empty"><div class="thumb">🛍</div><h3 class="title-2">Your cart is empty</h3><p class="body-6 muted">Add something from the collection and it will show up here.</p><button class="btn primary button-md" data-close="1">Browse the collection ↗</button></div>';
+  $("foot").innerHTML=ids.length?'<div class="sum"><div class="promo"><input id="code" placeholder="Promo code" aria-label="Promo code"><button class="btn primary sm button-sm" id="apply">Apply</button></div><p class="pmsg caption-1 muted" id="pmsg">'+(promo?'WELCOME10 applied. You saved '+m(disc)+'.':'Try WELCOME10 for 10% off.')+'</p><div class="row body-6 muted"><span>Subtotal</span><span>'+m(sub)+'</span></div>'+(promo?'<div class="row body-6 muted"><span>Discount</span><span>−'+m(disc)+'</span></div>':'')+'<div class="row body-6 muted"><span>Shipping</span><span>'+(shipFee?m(shipFee):'Free')+'</span></div><div class="row total"><span class="title-2">Total</span><span class="title-2">'+m(total)+'</span></div></div><div class="actions"><button class="btn primary block button-md" id="checkout">Checkout ↗</button><button class="btn block button-md" data-close="1">Continue shopping</button><p class="caption-1 muted" id="cmsg" style="text-align:center;min-height:20px">No hidden fees. Free returns for 30 days.</p></div>':'';
+}
+function open_(){$("drawer").classList.add("open");$("scrim").classList.add("open");$("drawer").setAttribute("aria-hidden","false");$("close").focus()}
+function close_(){$("drawer").classList.remove("open");$("scrim").classList.remove("open");$("drawer").setAttribute("aria-hidden","true");$("openCart").focus()}
+document.addEventListener("click",function(e){var t=e.target.closest("button");if(!t)return;
+  if(t.dataset.p){cart[t.dataset.p]++;render()}
+  else if(t.dataset.m){var i=t.dataset.m;cart[i]--;if(cart[i]<1)delete cart[i];render()}
+  else if(t.dataset.r){delete cart[t.dataset.r];render()}
+  else if(t.dataset.close){close_()}
+  else if(t.id==="apply"){var v=$("code").value.trim().toUpperCase();if(v==="WELCOME10"){promo=true;render()}else{$("pmsg").textContent=v?"That code isn’t valid. Check the spelling and try again.":"Enter a promo code first."}}
+  else if(t.id==="checkout"){$("cmsg").textContent="This is a demo, so checkout isn’t connected yet."}
+});
+$("openCart").onclick=open_;$("open2").onclick=open_;$("close").onclick=close_;$("scrim").onclick=close_;
+document.addEventListener("keydown",function(e){if(e.key==="Escape")close_()});
+function theme(t){document.documentElement.setAttribute("data-theme",t);$("theme").textContent=t==="dark"?"☀":"☾";try{localStorage.setItem("se-theme",t)}catch(x){}}
+(function(){var t=null;try{t=localStorage.getItem("se-theme")}catch(x){}if(!t)t=matchMedia("(prefers-color-scheme: light)").matches?"light":"dark";theme(t)})();
+$("theme").onclick=function(){theme(document.documentElement.getAttribute("data-theme")==="dark"?"light":"dark")};
+render();setTimeout(open_,300);
+</script>
+</body>
+</html>
