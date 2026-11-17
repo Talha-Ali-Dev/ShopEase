@@ -316,6 +316,9 @@
   .justify-center {
     justify-content: center;
   }
+  .justify-end {
+    justify-content: flex-end;
+  }
   .justify-start {
     justify-content: flex-start;
   }
@@ -477,6 +480,12 @@
   .py-4 {
     padding-block: calc(var(--spacing) * 4);
   }
+  .py-15 {
+    padding-block: calc(var(--spacing) * 15);
+  }
+  .py-20 {
+    padding-block: calc(var(--spacing) * 20);
+  }
   .py-25 {
     padding-block: calc(var(--spacing) * 25);
   }
@@ -488,6 +497,9 @@
   }
   .text-center {
     text-align: center;
+  }
+  .text-end {
+    text-align: end;
   }
   .align-middle {
     vertical-align: middle;
