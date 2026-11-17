@@ -51,6 +51,24 @@ themeBtn?.addEventListener("click", () => {
     updateThemeIcons()
 });
 
+// Cart open & close 
+let cartBtn = document.querySelector(".cart-open-btn");
+let cartCloseBtn = document.querySelectorAll(".close-btn");
+let cart = document.querySelector(".cart");
+
+cartBtn?.addEventListener("click", () => {
+
+    cart?.classList.remove("translate-x-100")
+
+})
+
+cartCloseBtn?.forEach((btn) => {
+    btn?.addEventListener("click", () => {
+
+        cart?.classList.add("translate-x-100")
+
+    })
+})
 
 
 
