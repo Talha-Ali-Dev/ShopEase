@@ -109,7 +109,7 @@ products.forEach((product) => {
 
                     <button
                         class="bg-blue text-text cursor-pointer rounded-sm border border-border px-6 py-2 font-medium "
-                        id="add-card-btn">Add to cart</button>
+                        id="add-card-btn" data-id="${product.id}">Add to cart</button>
                 </div>
 
             </div> 
@@ -123,18 +123,85 @@ products.forEach((product) => {
 let addToCartBtn = document.querySelectorAll("#add-card-btn");
 let cartCount = document.querySelector("#cart-count");
 
-let count = 0;
+let totalCount = Number(localStorage.getItem("count")) || 0;
+cartCount.innerText = totalCount;
+
+let cartItems = JSON.parse(localStorage.getItem("cartItems")) || [];
+
+let count = cartItems.reduce((total, item) => {
+    return total += item.quantity
+}, 0);
+
+if (cartCount) {
+
+    cartCount.innerText = count
+
+}
+
+// addToCartBtn?.forEach((cartBtn) => {
+
+//     cartBtn.addEventListener("click", () => {
+
+//         count++;
+//         cartCount.innerText = count
+
+//         localStorage.setItem("count", count)
+
+//     });
+
+// })
 
 addToCartBtn?.forEach((cartBtn) => {
 
     cartBtn.addEventListener("click", () => {
 
-        count++;
-        cartCount.innerText = count
+        let productId = Number(cartBtn.dataset.id);
+
+        let selectedProduct = products.find((product) => {
+
+            return product.id === productId
+
+        })
+
+        if (!selectedProduct || selectedProduct.stock <= 0) return
+
+        let existingProduct = cartItems.find((item) => {
+
+            return item.id === productId
+
+        })
+
+        if (existingProduct) {
+            if (existingProduct.quantiy >= selectedProduct.stock) return
+
+            existingProduct.quantiy++;
+        }
+        else {
+
+            cartItems.push({
+
+                id: selectedProduct.id,
+                category: selectedProduct.category,
+                name: selectedProduct.name,
+                price: selectedProduct.price,
+                quantity: 1
+
+            });
+
+        };
+
+        count = cartItems.reduce((total, item) => {
+            return total += item.quantity
+        }, 0);
+
+        if (cartCount) cartCount.innerText = count;
+
+        localStorage.setItem("cartItems", JSON.stringify(cartItems));
 
     });
 
 })
+
 
 
 
