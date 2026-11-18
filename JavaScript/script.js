@@ -138,19 +138,6 @@ if (cartCount) {
 
 }
 
-// addToCartBtn?.forEach((cartBtn) => {
-
-//     cartBtn.addEventListener("click", () => {
-
-//         count++;
-//         cartCount.innerText = count
-
-//         localStorage.setItem("count", count)
-
-//     });
-
-// })
-
 addToCartBtn?.forEach((cartBtn) => {
 
     cartBtn.addEventListener("click", () => {
@@ -174,7 +161,7 @@ addToCartBtn?.forEach((cartBtn) => {
         if (existingProduct) {
             if (existingProduct.quantiy >= selectedProduct.stock) return
 
-            existingProduct.quantiy++;
+            existingProduct.quantity++;
         }
         else {
 
@@ -200,7 +187,87 @@ addToCartBtn?.forEach((cartBtn) => {
 
     });
 
+});
+
+
+// Updating cartItems 
+let cartCollection = document.querySelector(".cart-collection");
+
+cartItems.map((item) => {
+    cartCollection.insertAdjacentHTML("beforeend", `
+    
+     <div class="product-info bg-bg border border-border rounded-md p-4 flex flex-col gap-2">
+
+                <span class="text-electric text-xs font-medium">${item.id} / ${item.category}</span>
+
+                <div class="flex justify-between">
+
+                    <div>
+
+                        <h3 class="text-text text-xl font-medium mb-2" id="product-name">
+                            ${item.name}
+                        </h3>
+                        <div class="count-block flex justify-start gap-2">
+                            <span
+                                class="size-6 border border-border rounded-full flex justify-center items-center text-[16px] bg-surface hover:border-electric cursor-pointer"
+                                id="count-increase">
+                                +</span>
+
+                            <span class="count-num">${item.quantity}</span>
+
+                            <span
+                                class="size-6 border border-border rounded-full flex justify-center items-center text-[16px] bg-surface hover:border-electric cursor-pointer"
+                                id="count-decrease">
+                                -</span>
+                        </div>
+
+                    </div>
+
+                    <div>
+
+                        <p class="productPrice">$${item.price}</p>
+
+                        <button class="productRemove hover:underline text-muted cursor-pointer text-sm" data-id="${item.id}">Remove</button>
+                    </div>
+
+                </div>
+
+            </div>
+
+    `)
 })
+
+// Remove Products form cart 
+
+let removeItemCart = document.querySelectorAll(".productRemove");
+
+removeItemCart.forEach((remove) => {
+
+    remove.addEventListener("click", () => {
+
+        let productId = Number(remove.dataset.id);
+
+        cartItems = cartItems.filter((item) => {
+            return item.id !== productId;
+        });
+
+        localStorage.setItem("cartItems", JSON.stringify(cartItems));
+
+        remove.closest(".product-info").remove();
+
+        count = cartItems.reduce((total, item) => {
+            return total + item.quantity;
+        }, 0);
+
+        if (cartCount) {
+            cartCount.innerText = count;
+        }
+
+    });
+
+});
+
+
 
 
 
