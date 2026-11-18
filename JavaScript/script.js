@@ -267,6 +267,32 @@ removeItemCart.forEach((remove) => {
 
 });
 
+// Calculations 
+let cartSubTotal = document.querySelector("#subtotal");
+let shippingCost = document.querySelector("#shipping");
+let totalOfProducts = document.querySelector("#total-of-products")
+
+let subTotal = cartItems.reduce((total, item) => {
+    return total + (item.quantity * item.price)
+}, 0);
+
+cartSubTotal.innerText = `$${subTotal}`;
+
+let shipping = 20;
+let tax = 10;
+if (subTotal >= 100) {
+
+    shipping = 0
+
+}
+
+shippingCost.innerText = `$${shipping}`;
+
+let totalCost = subTotal + shipping + tax;
+
+totalOfProducts.innerText = `$${totalCost}`
+
+console.log(totalCost)
 
 
 
