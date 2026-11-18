@@ -278,21 +278,26 @@ let subTotal = cartItems.reduce((total, item) => {
 
 cartSubTotal.innerText = `$${subTotal}`;
 
-let shipping = 20;
-let tax = 10;
-if (subTotal >= 100) {
+if (cartItems.length > 0) {
 
-    shipping = 0
+    let shipping = 20;
+    let tax = 10;
+
+    if (subTotal >= 100) {
+
+        shipping = 0
+
+    }
+
+    shippingCost.innerText = `$${shipping}`;
+
+    let totalCost = subTotal + shipping + tax;
+
+    totalOfProducts.innerText = `$${totalCost}`
 
 }
 
-shippingCost.innerText = `$${shipping}`;
 
-let totalCost = subTotal + shipping + tax;
-
-totalOfProducts.innerText = `$${totalCost}`
-
-console.log(totalCost)
 
 
 
