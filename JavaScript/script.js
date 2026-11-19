@@ -401,3 +401,312 @@ if (cartItems.length > 0) {
     })
 
 }
+
+// Filtering Products
+let filterBtn = document.querySelectorAll(".filter-btn");
+
+filterBtn?.forEach((btn) => {
+
+    btn?.addEventListener("click", () => {
+
+        filterBtn.forEach((b) => {
+
+            b?.classList.remove("bg-blue")
+            b?.classList.add("bg-surface")
+            document.getElementById(b.dataset.target)?.classList.add("hidden");
+
+        })
+
+        btn?.classList.add("bg-blue")
+        btn?.classList.remove("bg-surface")
+        document.getElementById(btn.dataset.target)?.classList.remove("hidden")
+    })
+
+})
+
+// Filtered Products 
+let electronicProducts = document.querySelector(".electronics-product-grid");
+let accessoriesProducts = document.querySelector(".accessories-product-grid");
+let clothingProducts = document.querySelector(".clothing-product-grid");
+let homeApplicancesProducts = document.querySelector(".home-appliances-product-grid");
+
+// Electronics 
+products.forEach((product) => {
+
+    if (product.category === "Electronics") {
+        electronicProducts.insertAdjacentHTML("beforeend",
+
+            `
+
+ <div
+
+ class="relative overflow-hidden p-10 border border-border bg-surface rounded-xl hover:border-electric transition duration-400 group">
+
+ <!-- glow: inside the card, behind the text -->
+
+ <div
+
+ class="pointer-events-none absolute -top-10 -right-10 size-50 rounded-full bg-orb1 opacity-0 blur-2xl group-hover:opacity-20 transition duration-400">
+
+ </div>
+
+<!-- content: positioned so it paints above the glow -->
+
+ <div class="relative flex flex-col gap-6">
+
+ <span class="text-electric text-xs font-medium">${product.id} / ${product.category}</span>
+
+ <h3 class="text-text text-xl font-medium">
+
+ ${product.name}
+
+ </h3>
+
+ <div class="mask-b-from-50%">
+
+ <img src="${product.image}" alt="" class="h-60 w-full object-cover">
+
+ </div>
+
+ <div class="flex justify-between mt-2">
+
+ <p class="productName">${product.name}</p>
+
+ <p class="productPrice">$${product.price}</p>
+
+ </div>
+
+<p class="text-muted text-sm font-normal">
+
+ ${product.description}
+
+ </p>
+
+ <button
+
+ class="bg-blue text-text cursor-pointer rounded-sm border border-border px-6 py-2 font-medium "
+
+ id="add-card-btn" data-id="${product.id}">Add to cart</button>
+
+ </div>
+
+ </div> 
+
+ `
+
+        )
+    }
+
+
+})
+
+// Accessories 
+products.forEach((product) => {
+
+    if (product.category === "Accessories") {
+        accessoriesProducts.insertAdjacentHTML("beforeend",
+
+            `
+
+ <div
+
+ class="relative overflow-hidden p-10 border border-border bg-surface rounded-xl hover:border-electric transition duration-400 group">
+
+ <!-- glow: inside the card, behind the text -->
+
+ <div
+
+ class="pointer-events-none absolute -top-10 -right-10 size-50 rounded-full bg-orb1 opacity-0 blur-2xl group-hover:opacity-20 transition duration-400">
+
+ </div>
+
+<!-- content: positioned so it paints above the glow -->
+
+ <div class="relative flex flex-col gap-6">
+
+ <span class="text-electric text-xs font-medium">${product.id} / ${product.category}</span>
+
+ <h3 class="text-text text-xl font-medium">
+
+ ${product.name}
+
+ </h3>
+
+ <div class="mask-b-from-50%">
+
+ <img src="${product.image}" alt="" class="h-60 w-full object-cover">
+
+ </div>
+
+ <div class="flex justify-between mt-2">
+
+ <p class="productName">${product.name}</p>
+
+ <p class="productPrice">$${product.price}</p>
+
+ </div>
+
+<p class="text-muted text-sm font-normal">
+
+ ${product.description}
+
+ </p>
+
+ <button
+
+ class="bg-blue text-text cursor-pointer rounded-sm border border-border px-6 py-2 font-medium "
+
+ id="add-card-btn" data-id="${product.id}">Add to cart</button>
+
+ </div>
+
+ </div> 
+
+ `
+
+        )
+    }
+
+
+})
+
+//Clothing
+products.forEach((product) => {
+
+    if (product.category === "Clothing") {
+        clothingProducts.insertAdjacentHTML("beforeend",
+
+            `
+
+ <div
+
+ class="relative overflow-hidden p-10 border border-border bg-surface rounded-xl hover:border-electric transition duration-400 group">
+
+ <!-- glow: inside the card, behind the text -->
+
+ <div
+
+ class="pointer-events-none absolute -top-10 -right-10 size-50 rounded-full bg-orb1 opacity-0 blur-2xl group-hover:opacity-20 transition duration-400">
+
+ </div>
+
+<!-- content: positioned so it paints above the glow -->
+
+ <div class="relative flex flex-col gap-6">
+
+ <span class="text-electric text-xs font-medium">${product.id} / ${product.category}</span>
+
+ <h3 class="text-text text-xl font-medium">
+
+ ${product.name}
+
+ </h3>
+
+ <div class="mask-b-from-50%">
+
+ <img src="${product.image}" alt="" class="h-60 w-full object-cover">
+
+ </div>
+
+ <div class="flex justify-between mt-2">
+
+ <p class="productName">${product.name}</p>
+
+ <p class="productPrice">$${product.price}</p>
+
+ </div>
+
+<p class="text-muted text-sm font-normal">
+
+ ${product.description}
+
+ </p>
+
+ <button
+
+ class="bg-blue text-text cursor-pointer rounded-sm border border-border px-6 py-2 font-medium "
+
+ id="add-card-btn" data-id="${product.id}">Add to cart</button>
+
+ </div>
+
+ </div> 
+
+ `
+
+        )
+    }
+
+
+})
+
+// Home Appliances 
+products.forEach((product) => {
+
+    if (product.category === "Home Appliances") {
+        homeApplicancesProducts.insertAdjacentHTML("beforeend",
+
+            `
+
+ <div
+
+ class="relative overflow-hidden p-10 border border-border bg-surface rounded-xl hover:border-electric transition duration-400 group">
+
+ <!-- glow: inside the card, behind the text -->
+
+ <div
+
+ class="pointer-events-none absolute -top-10 -right-10 size-50 rounded-full bg-orb1 opacity-0 blur-2xl group-hover:opacity-20 transition duration-400">
+
+ </div>
+
+<!-- content: positioned so it paints above the glow -->
+
+ <div class="relative flex flex-col gap-6">
+
+ <span class="text-electric text-xs font-medium">${product.id} / ${product.category}</span>
+
+ <h3 class="text-text text-xl font-medium">
+
+ ${product.name}
+
+ </h3>
+
+ <div class="mask-b-from-50%">
+
+ <img src="${product.image}" alt="" class="h-60 w-full object-cover">
+
+ </div>
+
+ <div class="flex justify-between mt-2">
+
+ <p class="productName">${product.name}</p>
+
+ <p class="productPrice">$${product.price}</p>
+
+ </div>
+
+<p class="text-muted text-sm font-normal">
+
+ ${product.description}
+
+ </p>
+
+ <button
+
+ class="bg-blue text-text cursor-pointer rounded-sm border border-border px-6 py-2 font-medium "
+
+ id="add-card-btn" data-id="${product.id}">Add to cart</button>
+
+ </div>
+
+ </div> 
+
+ `
+
+        )
+    }
+
+
+})
+

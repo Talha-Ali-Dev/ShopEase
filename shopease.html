@@ -299,40 +299,50 @@
 
             <button
                 class="bg-blue text-text cursor-pointer rounded-sm border border-border px-6 py-2 font-medium filter-btn"
-                data-target="all-product-grid">All</button>
+                data-target="all-products">All</button>
 
             <button
                 class="bg-surface text-text cursor-pointer rounded-sm border border-border px-6 py-2 font-medium filter-btn"
-                data-target="electronics-product-grid">Electronics</button>
+                data-target="electronics-products">Electronics</button>
 
             <button
                 class="bg-surface text-text cursor-pointer rounded-sm border border-border px-6 py-2 font-medium filter-btn"
-                data-target="accessories-product-grid">Accessories</button>
+                data-target="accessories-products">Accessories</button>
 
             <button
                 class="bg-surface text-text cursor-pointer rounded-sm border border-border px-6 py-2 font-medium filter-btn"
-                data-target="clothing-product-grid">Clothing</button>
+                data-target="clothing-products">Clothing</button>
 
             <button
                 class="bg-surface text-text cursor-pointer rounded-sm border border-border px-6 py-2 font-medium filter-btn"
-                data-target="home-appliances-product-grid">Home Appliances</button>
+                data-target="home-appliances-products">Home Appliances</button>
 
         </div>
 
         <!-- All Products  -->
-        <div class="grid grid-cols-1 lg:grid-cols-3 gap-6 all-product-grid"> </div>
+        <div class="" id="all-products">
+            <div class="grid grid-cols-1 lg:grid-cols-3 gap-6 all-product-grid"> </div>
+        </div>
 
         <!-- Electronics  -->
-        <div class="grid grid-cols-1 lg:grid-cols-3 gap-6 electronics-product-grid"> </div>
+        <div class="hidden" id="electronics-products">
+            <div class="grid grid-cols-1 lg:grid-cols-3 gap-6 electronics-product-grid"> </div>
+        </div>
 
         <!-- Accessories  -->
-        <div class="grid grid-cols-1 lg:grid-cols-3 gap-6 accessories-product-grid"> </div>
+        <div class="hidden" id="accessories-products">
+            <div class="grid grid-cols-1 lg:grid-cols-3 gap-6 accessories-product-grid"> </div>
+        </div>
 
         <!-- Clothing  -->
-        <div class="grid grid-cols-1 lg:grid-cols-3 gap-6 clothing-product-grid"> </div>
+        <div class="hidden" id="clothing-products">
+            <div class="grid grid-cols-1 lg:grid-cols-3 gap-6 clothing-product-grid"> </div>
+        </div>
 
         <!-- Home Appliances  -->
-        <div class="grid grid-cols-1 lg:grid-cols-3 gap-6 home-appliances-product-grid"> </div>
+        <div class="hidden" id="home-appliances-products">
+            <div class="grid grid-cols-1 lg:grid-cols-3 gap-6 home-appliances-product-grid"> </div>
+        </div>
 
     </section>
 
