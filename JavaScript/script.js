@@ -106,6 +106,11 @@ products.forEach((product) => {
 
  </div>
 
+<div
+    class="absolute top-2 right-2 bg-electric/20 rounded-md flex justify-center items-center transition duration-400 cursor-pointer py-2 px-4 text-xs font-medium">
+    ${product.stock} in stock
+</div>
+
 <!-- content: positioned so it paints above the glow -->
 
  <div class="relative flex flex-col gap-6">
@@ -450,6 +455,11 @@ products.forEach((product) => {
 
  </div>
 
+  <div
+        class="absolute top-2 right-2 bg-electric/20 rounded-md flex justify-center items-center transition duration-400 cursor-pointer py-2 px-4 text-xs font-medium">
+        ${product.stock} in stock
+    </div>
+
 <!-- content: positioned so it paints above the glow -->
 
  <div class="relative flex flex-col gap-6">
@@ -519,6 +529,11 @@ products.forEach((product) => {
  class="pointer-events-none absolute -top-10 -right-10 size-50 rounded-full bg-orb1 opacity-0 blur-2xl group-hover:opacity-20 transition duration-400">
 
  </div>
+
+  <div
+        class="absolute top-2 right-2 bg-electric/20 rounded-md flex justify-center items-center transition duration-400 cursor-pointer py-2 px-4 text-xs font-medium">
+        ${product.stock} in stock
+    </div>
 
 <!-- content: positioned so it paints above the glow -->
 
@@ -590,6 +605,11 @@ products.forEach((product) => {
 
  </div>
 
+  <div
+        class="absolute top-2 right-2 bg-electric/20 rounded-md flex justify-center items-center transition duration-400 cursor-pointer py-2 px-4 text-xs font-medium">
+        ${product.stock} in stock
+    </div>
+
 <!-- content: positioned so it paints above the glow -->
 
  <div class="relative flex flex-col gap-6">
@@ -659,6 +679,11 @@ products.forEach((product) => {
  class="pointer-events-none absolute -top-10 -right-10 size-50 rounded-full bg-orb1 opacity-0 blur-2xl group-hover:opacity-20 transition duration-400">
 
  </div>
+
+  <div
+        class="absolute top-2 right-2 bg-electric/20 rounded-md flex justify-center items-center transition duration-400 cursor-pointer py-2 px-4 text-xs font-medium">
+        ${product.stock} in stock
+    </div>
 
 <!-- content: positioned so it paints above the glow -->
 
