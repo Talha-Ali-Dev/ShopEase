@@ -638,12 +638,13 @@
 
     </div>
 
-    <div class="w-full h-screen bg-surface/10 backdrop-blur-xl fixed top-0 left-0 hidden">
+    <div class="w-full h-screen bg-surface/10 backdrop-blur-xl fixed top-0 left-0 hidden" id="product-info-popup">
+
         <div
-            class="product-info-popup w-150 h-auto border border-border hover:border-electric rounded-md bg-surface p-0 backdrop-blur-3xl min-h-100 flex flex-col justify-center fixed top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2">
+            class="w-150 h-auto border border-border hover:border-electric rounded-md bg-surface p-0 backdrop-blur-3xl min-h-100 flex flex-col justify-center fixed top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2">
 
             <div
-                class="absolute top-2 right-2 text-muted size-6 rounded-full border border-border hover:border-electric flex justify-center items-center product-info-popup-close">
+                class="absolute top-2 right-2 text-muted size-6 rounded-full border border-border hover:border-electric flex justify-center items-center product-info-popup-close cursor-pointer">
                 x</div>
 
             <div class="product-info-popup-image"></div>
@@ -666,6 +667,8 @@
         </div>
 
     </div>
+
+
 
     <script type="module" src="./JavaScript/script.js"></script>
 

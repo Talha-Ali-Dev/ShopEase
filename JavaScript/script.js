@@ -143,11 +143,19 @@ products.forEach((product) => {
 
  </p>
 
+ <div>
  <button
 
- class="bg-blue text-text cursor-pointer rounded-sm border border-border px-6 py-2 font-medium "
+ class="bg-blue text-text cursor-pointer rounded-sm border border-border px-6 py-2 font-medium w-full"
 
  id="add-card-btn" data-id="${product.id}">Add to cart</button>
+ <button
+
+ class="bg-surface text-text cursor-pointer rounded-sm border border-border px-6 py-2 font-medium w-full mt-2"
+
+ id="show-product" data-id="${product.id}">Show product</button>
+
+ </div>
 
  </div>
 
@@ -732,6 +740,76 @@ products.forEach((product) => {
         )
     }
 
+
+})
+
+// Opening product popup
+let productPopup = document.querySelector("#product-info-popup");
+let productPopupOpener = document.querySelectorAll("#show-product");
+let productPopupCloser = document.querySelectorAll(".product-info-popup-close");
+
+productPopupOpener?.forEach((productBtn) => {
+
+    productBtn.addEventListener("click", () => {
+
+        productPopup.classList.remove("hidden")
+
+        let productId = Number(productBtn.dataset.id);
+
+        let selectedProduct = products.find((product) => {
+
+            return product.id === productId
+
+        })
+
+        if (selectedProduct) {
+
+            productPopup.innerHTML = `
+                
+                              <div
+            class="w-150 h-auto border border-border hover:border-electric rounded-md bg-surface p-0 backdrop-blur-3xl min-h-100 flex flex-col justify-center fixed top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2">
+
+            <div
+                class="absolute top-2 right-2 text-muted size-6 rounded-full border border-border hover:border-electric flex justify-center items-center product-info-popup-close cursor-pointer z-10">
+                x</div>
+
+            <div class="product-info-popup-image">
+            <img src="${selectedProduct.image}" class="z-1">
+            </div>
+
+            <div class="product-info-popup-info flex justify-between p-6">
+
+                <div>
+                    <span class="text-electric text-xs font-medium">${selectedProduct.id} / ${selectedProduct.category}</span>
+                    <h3 class="text-text text-2xl font-medium">${selectedProduct.name}</h3>
+                </div>
+
+                <div>
+                    <button
+                        class="bg-electric/20 size-10 rounded-full flex justify-center items-center transform rotate-320 hover:rotate-360 transition duration-400 cursor-pointer"><img
+                            src="assets/icons/next (1).png" alt=""></button>
+                </div>
+
+            </div>
+
+        </div>
+                `
+
+        }
+
+    });
+
+});
+
+productPopupCloser.forEach((closer) => {
+
+    closer.addEventListener("click", () => {
+
+        // productPopup.classList.toggle("hidden")
+
+        console.log("clicked")
+
+    })
 
 })
 
