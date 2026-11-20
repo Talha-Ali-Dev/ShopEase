@@ -746,7 +746,7 @@ products.forEach((product) => {
 // Opening product popup
 let productPopup = document.querySelector("#product-info-popup");
 let productPopupOpener = document.querySelectorAll("#show-product");
-let productPopupCloser = document.querySelectorAll(".product-info-popup-close");
+// let productPopupCloser = document.querySelectorAll(".product-info-popup-close");
 
 productPopupOpener?.forEach((productBtn) => {
 
@@ -785,9 +785,11 @@ productPopupOpener?.forEach((productBtn) => {
                 </div>
 
                 <div>
-                    <button
-                        class="bg-electric/20 size-10 rounded-full flex justify-center items-center transform rotate-320 hover:rotate-360 transition duration-400 cursor-pointer"><img
-                            src="assets/icons/next (1).png" alt=""></button>
+                    <p class="text-muted text-sm font-normal">
+
+                      ${selectedProduct.price}
+
+                    </p>
                 </div>
 
             </div>
@@ -795,21 +797,31 @@ productPopupOpener?.forEach((productBtn) => {
         </div>
                 `
 
+            let productPopupCloser = productPopup.querySelector(".product-info-popup-close");
+
+            productPopupCloser.addEventListener("click", () => {
+
+                console.log("clicked");
+
+                productPopup.classList.add("hidden");
+
+            });
+
         }
 
     });
 
 });
 
-productPopupCloser.forEach((closer) => {
+// productPopupCloser.forEach((closer) => {
 
-    closer.addEventListener("click", () => {
+//     closer.addEventListener("click", () => {
 
-        // productPopup.classList.toggle("hidden")
+//         // productPopup.classList.toggle("hidden")
 
-        console.log("clicked")
+//         console.log("clicked")
 
-    })
+//     })
 
-})
+// })
 
