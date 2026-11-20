@@ -259,47 +259,47 @@ cartItems.map((item) => {
 
     cartCollection.insertAdjacentHTML("beforeend", `
 
-<div class="product-info bg-bg border border-border rounded-md p-4 flex flex-col gap-2">
+ <div class="product-info bg-bg border border-border rounded-md p-4 flex flex-col gap-2">
 
- <span class="text-electric text-xs font-medium">${item.id} / ${item.category}</span>
+   <span class="text-electric text-xs font-medium">${item.id} / ${item.category}</span>
 
  <div class="flex justify-between">
 
  <div>
 
- <h3 class="text-text text-xl font-medium mb-2" id="product-name">
+   <h3 class="text-text text-xl font-medium mb-2" id="product-name">
 
  ${item.name}
 
-</h3>
+  </h3>
 
- <div class="count-block flex justify-start gap-2">
+  <div class="count-block flex justify-start gap-2">
 
- <span
+    <span
 
- class="size-6 border border-border rounded-full flex justify-center items-center text-[16px] bg-surface hover:border-electric cursor-pointer"
+  class="size-6 border border-border rounded-full flex justify-center items-center text-[16px] bg-surface hover:border-electric cursor-pointer"
 
- id="count-increase">
+    id="count-increase">
 
- +</span>
+    +</span>
 
- <span class="count-num">${item.quantity}</span>
+    <span class="count-num">${item.quantity}</span>
 
- <span
+  <span
 
- class="size-6 border border-border rounded-full flex justify-center items-center text-[16px] bg-surface hover:border-electric cursor-pointer"
+  class="size-6 border border-border rounded-full flex justify-center items-center text-[16px] bg-surface hover:border-electric cursor-pointer"
 
- id="count-decrease">
+  id="count-decrease">
 
- -</span>
+   -</span>
 
- </div>
+   </div>
 
- </div>
+   </div>
 
- <div>
+   <div>
 
- <p class="productPrice">$${item.price}</p>
+  <p class="productPrice">$${item.price}</p>
 
  <button class="productRemove hover:underline text-muted cursor-pointer text-sm" data-id="${item.id}">Remove</button>
 
@@ -388,6 +388,7 @@ if (cartItems.length > 0) {
     // discount applier 
 
     let discountCode = "siraura"
+    let discountCode2 = "zakugreataura"
 
     let promoCodeForm = document.querySelector("#promo-code-form");
 
@@ -402,6 +403,16 @@ if (cartItems.length > 0) {
         if (value === discountCode) {
 
             discount = 20;
+
+            totalCost = subTotal + shipping + tax - discount;
+
+            totalOfProducts.innerText = `$${totalCost}`;
+
+        }
+
+        if (value === discountCode2) {
+
+            discount = 100;
 
             totalCost = subTotal + shipping + tax - discount;
 
@@ -500,11 +511,19 @@ products.forEach((product) => {
 
  </p>
 
+ <div>
  <button
 
- class="bg-blue text-text cursor-pointer rounded-sm border border-border px-6 py-2 font-medium "
+ class="bg-blue text-text cursor-pointer rounded-sm border border-border px-6 py-2 font-medium w-full"
 
  id="add-card-btn" data-id="${product.id}">Add to cart</button>
+ <button
+
+ class="bg-surface text-text cursor-pointer rounded-sm border border-border px-6 py-2 font-medium w-full mt-2"
+
+ id="show-product" data-id="${product.id}">Show product</button>
+
+ </div>
 
  </div>
 
@@ -575,11 +594,19 @@ products.forEach((product) => {
 
  </p>
 
+ <div>
  <button
 
- class="bg-blue text-text cursor-pointer rounded-sm border border-border px-6 py-2 font-medium "
+ class="bg-blue text-text cursor-pointer rounded-sm border border-border px-6 py-2 font-medium w-full"
 
  id="add-card-btn" data-id="${product.id}">Add to cart</button>
+ <button
+
+ class="bg-surface text-text cursor-pointer rounded-sm border border-border px-6 py-2 font-medium w-full mt-2"
+
+ id="show-product" data-id="${product.id}">Show product</button>
+
+ </div>
 
  </div>
 
@@ -650,11 +677,19 @@ products.forEach((product) => {
 
  </p>
 
+ <div>
  <button
 
- class="bg-blue text-text cursor-pointer rounded-sm border border-border px-6 py-2 font-medium "
+ class="bg-blue text-text cursor-pointer rounded-sm border border-border px-6 py-2 font-medium w-full"
 
  id="add-card-btn" data-id="${product.id}">Add to cart</button>
+ <button
+
+ class="bg-surface text-text cursor-pointer rounded-sm border border-border px-6 py-2 font-medium w-full mt-2"
+
+ id="show-product" data-id="${product.id}">Show product</button>
+
+ </div>
 
  </div>
 
@@ -725,11 +760,19 @@ products.forEach((product) => {
 
  </p>
 
+  <div>
  <button
 
- class="bg-blue text-text cursor-pointer rounded-sm border border-border px-6 py-2 font-medium "
+ class="bg-blue text-text cursor-pointer rounded-sm border border-border px-6 py-2 font-medium w-full"
 
  id="add-card-btn" data-id="${product.id}">Add to cart</button>
+ <button
+
+ class="bg-surface text-text cursor-pointer rounded-sm border border-border px-6 py-2 font-medium w-full mt-2"
+
+ id="show-product" data-id="${product.id}">Show product</button>
+
+ </div>
 
  </div>
 
@@ -774,7 +817,7 @@ productPopupOpener?.forEach((productBtn) => {
                 x</div>
 
             <div class="product-info-popup-image">
-            <img src="${selectedProduct.image}" class="z-1">
+            <img src="${selectedProduct.image}" class="z-1 w-full h-100 object-cover">
             </div>
 
             <div class="product-info-popup-info flex justify-between p-6">
@@ -785,9 +828,9 @@ productPopupOpener?.forEach((productBtn) => {
                 </div>
 
                 <div>
-                    <p class="text-muted text-sm font-normal">
+                    <p class="text-muted text-sm font-medium">
 
-                      ${selectedProduct.price}
+                      $${selectedProduct.price}
 
                     </p>
                 </div>
